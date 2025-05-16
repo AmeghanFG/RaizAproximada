@@ -98,9 +98,8 @@ btnCalcular.addEventListener("click", (e) => {
 // Validar que intervalo menor sea efectivamente menor que el intervalo mayor
 function validarIngresoFactorParo(valorFactorParo) {
   if (factorParo.value === "noIteraciones") {
-    if (valorFactorParo.includes(".")) {
-      mensajesError.textContent =
-        "No se admiten iteraciones con puntos decimales";
+    if (valorFactorParo.includes(".") || !valorFactorParo.includes('1')) {
+      mensajesError.textContent = "No se admiten iteraciones con puntos decimales";
       return false;
     }
   } else if (factorParo.value === "errorRelativo") {
