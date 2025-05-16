@@ -29,7 +29,7 @@ btnCalcular.addEventListener("click", (e) => {
     if (validarIngresoFactorParo(valorFactorParo)) {
       // Enviar valores a la función
       let resultados = factorDeParo(
-        ingresoFactorParo.value,
+        parseFloat(valorFactorParo),
         parseFloat(intervaloInferior.value),
         parseFloat(intervaloSuperior.value)
       );
@@ -97,11 +97,15 @@ btnCalcular.addEventListener("click", (e) => {
 
 // Validar que intervalo menor sea efectivamente menor que el intervalo mayor
 function validarIngresoFactorParo(valorFactorParo) {
-	if (factorParo.value === "noIteraciones") {
-    	labelIngresoFactorParo.textContent = "Número de iteraciones";
-	} else if (factorParo.value === "errorRelativo") {
-    	labelIngresoFactorParo.textContent = "Error relativo";
-	} else {
-    	labelIngresoFactorParo.textContent = "Selección inválida";
-	}
+  if (factorParo.value === "noIteraciones") {
+    if (valorFactorParo.includes(".")) {
+      mensajesError.textContent =
+        "No se admiten iteraciones con puntos decimales";
+      return false;
+    }
+  } else if (factorParo.value === "errorRelativo") {
+  } else {
+    labelIngresoFactorParo.textContent = "Selección inválida";
+  }
+  return true;
 }
