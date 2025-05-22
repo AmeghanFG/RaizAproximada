@@ -23,13 +23,18 @@ btnCalcular.addEventListener("click", (e) => {
   const tbodyResults = document.getElementById("tbodyResults");
   const intervaloInferior = document.getElementById("intervaloA");
   const intervaloSuperior = document.getElementById("intervaloB");
-  const valorFactorParo = ingresoFactorParo.value;
+  let valorFactorParo = '';
+
+  if (factorParo.value == "errorRelativo") {
+    valorFactorParo = "<";
+  }
+  valorFactorParo += ingresoFactorParo.value;
 
   try {
     if (validarIngresoFactorParo(valorFactorParo)) {
       // Enviar valores a la función
       let resultados = factorDeParo(
-        parseFloat(valorFactorParo),
+        valorFactorParo,
         parseFloat(intervaloInferior.value),
         parseFloat(intervaloSuperior.value)
       );
@@ -98,13 +103,19 @@ btnCalcular.addEventListener("click", (e) => {
 // Validar que intervalo menor sea efectivamente menor que el intervalo mayor
 function validarIngresoFactorParo(valorFactorParo) {
   if (factorParo.value === "noIteraciones") {
-    if (valorFactorParo.includes(".") || !valorFactorParo.includes('1')) {
-      mensajesError.textContent = "No se admiten iteraciones con puntos decimales";
+    if (valorFactorParo.includes(".")) {
+      mensajesError.textContent =
+        "No se admiten iteraciones con puntos decimales";
       return false;
     }
   } else if (factorParo.value === "errorRelativo") {
+    if (valorFactorParo.includes(">")) {
+      mensajesError.textContent = "No se puede pedir un error porcentual mayor";
+      return false;
+    }
   } else {
     labelIngresoFactorParo.textContent = "Selección inválida";
   }
   return true;
 }
+// npm install vite -save-dev     ->          "dev": vite poner despues de test
