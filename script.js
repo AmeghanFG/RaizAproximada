@@ -56,6 +56,10 @@ btnCalcular.addEventListener("click", (e) => {
         if (aproximacion.ea == Infinity) {
           tdEa.textContent = "No aplica"; // Si es infinito, se muestra "no aplica"
         }
+        if (isNaN(parseInt(aproximacion.xr))) {
+          mensajesError.innerHTML = "El intervalo no aplicable";
+          return;
+        }
 
         // Añadir clases a los elementos para el estilo
         tdIteracion.classList.add(
@@ -116,7 +120,7 @@ function validarIngresoFactorParo(valorFactorParo) {
   } else if (factorDeParo.value == NaN) {
     labelIngresoFactorParo.textContent = "Selección inválida";
   } else {
-    labelIngresoFactorParo.textContent = "Selección inválida";
+    labelIngresoFactorParo.textContent = "Selección de valores inválida";
   }
   return true;
 }
