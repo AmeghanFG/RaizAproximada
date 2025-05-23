@@ -23,7 +23,7 @@ btnCalcular.addEventListener("click", (e) => {
   const tbodyResults = document.getElementById("tbodyResults");
   const intervaloInferior = document.getElementById("intervaloA");
   const intervaloSuperior = document.getElementById("intervaloB");
-  let valorFactorParo = '';
+  let valorFactorParo = "";
 
   if (factorParo.value == "errorRelativo") {
     valorFactorParo = "<";
@@ -113,6 +113,8 @@ function validarIngresoFactorParo(valorFactorParo) {
       mensajesError.textContent = "No se puede pedir un error porcentual mayor";
       return false;
     }
+  } else if (factorDeParo.value == NaN) {
+    labelIngresoFactorParo.textContent = "Selección inválida";
   } else {
     labelIngresoFactorParo.textContent = "Selección inválida";
   }
